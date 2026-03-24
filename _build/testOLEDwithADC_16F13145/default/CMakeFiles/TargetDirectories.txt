@@ -1,0 +1,5 @@
+D:/Dropbox/Program/ForMicrochip/test/testOLEDwithADC_16F13145.X/_build/testOLEDwithADC_16F13145/default/CMakeFiles/testOLEDwithADC_16F13145_default_default_XC8_assemblePreprocess.dir
+D:/Dropbox/Program/ForMicrochip/test/testOLEDwithADC_16F13145.X/_build/testOLEDwithADC_16F13145/default/CMakeFiles/testOLEDwithADC_16F13145_default_default_XC8_compile.dir
+D:/Dropbox/Program/ForMicrochip/test/testOLEDwithADC_16F13145.X/_build/testOLEDwithADC_16F13145/default/CMakeFiles/testOLEDwithADC_16F13145_default_image_CgGcJHuz.dir
+D:/Dropbox/Program/ForMicrochip/test/testOLEDwithADC_16F13145.X/_build/testOLEDwithADC_16F13145/default/CMakeFiles/edit_cache.dir
+D:/Dropbox/Program/ForMicrochip/test/testOLEDwithADC_16F13145.X/_build/testOLEDwithADC_16F13145/default/CMakeFiles/rebuild_cache.dir
