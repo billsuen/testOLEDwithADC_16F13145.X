@@ -144,6 +144,21 @@ void CLB1_CLB1I0_Task(void);
  * @return None.
 */
 void CLB1_CLB1I0_SetInterruptHandler(void (* InterruptHandler)(void));
+/**
+ * @ingroup clb1
+ * @brief Implements the task for the CLB1I1 interrupt events.
+ * @pre CLB1_Initialize() is already called.
+ * @param None.
+ * @return None.
+ */
+void CLB1_CLB1I1_Task(void);
+/**
+* @ingroup clb1
+ * @brief Sets the callback function for the interrupt event.
+ * @param *InterruptHandler - Callback function for the interrupt event.
+ * @return None.
+*/
+void CLB1_CLB1I1_SetInterruptHandler(void (* InterruptHandler)(void));
 #endif // CLB1_H
 /**
  End of File

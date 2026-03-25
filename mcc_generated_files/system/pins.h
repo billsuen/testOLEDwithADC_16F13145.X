@@ -49,6 +49,44 @@
 #define PULL_UP_ENABLED      1
 #define PULL_UP_DISABLED     0
 
+// get/set IO_RA0 aliases
+#define IND_G_TRIS                 TRISAbits.TRISA0
+#define IND_G_LAT                  LATAbits.LATA0
+#define IND_G_PORT                 PORTAbits.RA0
+#define IND_G_WPU                  WPUAbits.WPUA0
+#define IND_G_OD                   ODCONAbits.ODCA0
+#define IND_G_ANS                  ANSELAbits.ANSA0
+#define IND_G_SetHigh()            do { LATAbits.LATA0 = 1; } while(0)
+#define IND_G_SetLow()             do { LATAbits.LATA0 = 0; } while(0)
+#define IND_G_Toggle()             do { LATAbits.LATA0 = ~LATAbits.LATA0; } while(0)
+#define IND_G_GetValue()           PORTAbits.RA0
+#define IND_G_SetDigitalInput()    do { TRISAbits.TRISA0 = 1; } while(0)
+#define IND_G_SetDigitalOutput()   do { TRISAbits.TRISA0 = 0; } while(0)
+#define IND_G_SetPullup()          do { WPUAbits.WPUA0 = 1; } while(0)
+#define IND_G_ResetPullup()        do { WPUAbits.WPUA0 = 0; } while(0)
+#define IND_G_SetPushPull()        do { ODCONAbits.ODCA0 = 0; } while(0)
+#define IND_G_SetOpenDrain()       do { ODCONAbits.ODCA0 = 1; } while(0)
+#define IND_G_SetAnalogMode()      do { ANSELAbits.ANSA0 = 1; } while(0)
+#define IND_G_SetDigitalMode()     do { ANSELAbits.ANSA0 = 0; } while(0)
+// get/set IO_RA1 aliases
+#define IND_R_TRIS                 TRISAbits.TRISA1
+#define IND_R_LAT                  LATAbits.LATA1
+#define IND_R_PORT                 PORTAbits.RA1
+#define IND_R_WPU                  WPUAbits.WPUA1
+#define IND_R_OD                   ODCONAbits.ODCA1
+#define IND_R_ANS                  ANSELAbits.ANSA1
+#define IND_R_SetHigh()            do { LATAbits.LATA1 = 1; } while(0)
+#define IND_R_SetLow()             do { LATAbits.LATA1 = 0; } while(0)
+#define IND_R_Toggle()             do { LATAbits.LATA1 = ~LATAbits.LATA1; } while(0)
+#define IND_R_GetValue()           PORTAbits.RA1
+#define IND_R_SetDigitalInput()    do { TRISAbits.TRISA1 = 1; } while(0)
+#define IND_R_SetDigitalOutput()   do { TRISAbits.TRISA1 = 0; } while(0)
+#define IND_R_SetPullup()          do { WPUAbits.WPUA1 = 1; } while(0)
+#define IND_R_ResetPullup()        do { WPUAbits.WPUA1 = 0; } while(0)
+#define IND_R_SetPushPull()        do { ODCONAbits.ODCA1 = 0; } while(0)
+#define IND_R_SetOpenDrain()       do { ODCONAbits.ODCA1 = 1; } while(0)
+#define IND_R_SetAnalogMode()      do { ANSELAbits.ANSA1 = 1; } while(0)
+#define IND_R_SetDigitalMode()     do { ANSELAbits.ANSA1 = 0; } while(0)
 // get/set IO_RA2 aliases
 #define SW_TRIS                 TRISAbits.TRISA2
 #define SW_LAT                  LATAbits.LATA2

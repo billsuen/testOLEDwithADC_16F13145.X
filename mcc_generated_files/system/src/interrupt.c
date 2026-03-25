@@ -81,6 +81,14 @@ void __interrupt() INTERRUPT_InterruptManager (void)
         {
             ADC_ThresholdISR();
         } 
+        else if(PIE7bits.CLB1IE0 == 1 && PIR7bits.CLB1IF0 == 1)
+        {
+            CLB1_CLB1I0_Task();
+        }
+        else if(PIE7bits.CLB1IE1 == 1 && PIR7bits.CLB1IF1 == 1)
+        {
+            CLB1_CLB1I1_Task();
+        }
         else
         {
             //Unhandled Interrupt

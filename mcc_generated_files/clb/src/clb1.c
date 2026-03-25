@@ -35,6 +35,7 @@
 #include "../../system/system.h"
 
 static void (*CLB1_CLB1I0_InterruptHandler)(void);
+static void (*CLB1_CLB1I1_InterruptHandler)(void);
 
 extern uint16_t start_clb_config;
 extern uint16_t end_clb_config;
@@ -67,11 +68,10 @@ void CLB1_Initialize(void)
     PIR7bits.CLB1IF0 = 0U;
     /* Enabled CLB1I0 CLB1 interrupt */
     PIE7bits.CLB1IE0 = 1U;
-    /* Clearing CLB1I1 IF flag. */
+    /* Clearing CLB1I1 IF flag before enabling the interrupt. */
     PIR7bits.CLB1IF1 = 0U;
-    /* Disabled CLB1I1 CLB1 interrupt */
-    PIE7bits.CLB1IE1 = 0U;
-
+    /* Enabled CLB1I1 CLB1 interrupt */
+    PIE7bits.CLB1IE1 = 1U;
     /* Clearing CLB1I2 IF flag. */
     PIR7bits.CLB1IF2 = 0U;
     /* Disabled CLB1I2 CLB1 interrupt */
@@ -195,6 +195,23 @@ void CLB1_CLB1I0_Task(void)
         if (CLB1_CLB1I0_InterruptHandler != NULL)
         {
             CLB1_CLB1I0_InterruptHandler();
+        }
+    }
+}
+
+void CLB1_CLB1I1_SetInterruptHandler(void (* InterruptHandler)(void))
+{
+    CLB1_CLB1I1_InterruptHandler = InterruptHandler;
+}
+
+void CLB1_CLB1I1_Task(void)
+{
+    if (PIR7bits.CLB1IF1 == 1U)
+    {
+        PIR7bits.CLB1IF1 = 0U;
+        if (CLB1_CLB1I1_InterruptHandler != NULL)
+        {
+            CLB1_CLB1I1_InterruptHandler();
         }
     }
 }

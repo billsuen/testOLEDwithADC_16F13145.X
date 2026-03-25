@@ -19,6 +19,12 @@ void USER_CLB1I0_ISR()
 		switchFlag = SET;
 }
 
+void USER_CLB1I1_ISR()
+{
+	if(SW_PORT == 0)
+		switchFlag = CLEAR;
+}
+
 void USER_TMR0_ISR()
 {
 	// Add your custom TMR0 interrupt code here
@@ -32,9 +38,11 @@ void USER_TMR0_ISR()
 	}
 	*/
 
-	VR_SampleCnt = (VR_SampleCnt + 1) % VR_SAMPLE_RATE;
-	if(VR_SampleCnt == 0)
+	VR_SampleCnt++;
+	if(VR_SampleCnt >= VR_SAMPLE_RATE)
 	{
+		VR_SampleCnt = CLEAR;
+
 		if(POINT_TO_VR)
 		{
 			ADC_ChannelSelect(VR);
@@ -65,7 +73,7 @@ void USER_ADC_ISR()
 			VR_ConvertFlag = SET;
 		}
 	}
-	else	//!POINT_TO_VR = point to BATT
+	else	//!POINT_TO_VR = point to VIN
 	{
 		BATT_tmpValue += ADC_ConversionResultGet();
 		BATT_ConvertCnt++;

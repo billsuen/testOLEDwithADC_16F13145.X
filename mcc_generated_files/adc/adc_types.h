@@ -36,6 +36,7 @@
 #ifndef ADC_TYPES_H
 #define	ADC_TYPES_H
 
+#include <stdint.h>
 // Section: Macros
 
 /**

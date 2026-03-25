@@ -6,6 +6,7 @@
 #include <stdint.h>
 
 void USER_CLB1I0_ISR(void);
+void USER_CLB1I1_ISR(void);
 void USER_TMR0_ISR(void);
 void USER_ADC_ISR(void);
 void VR_TO_STR(uint16_t value, uint8_t *buffer);

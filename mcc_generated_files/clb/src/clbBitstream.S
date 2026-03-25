@@ -57,9 +57,9 @@ GLOBAL  _end_clb_config
 PSECT  clb_config,global,class=STRCODE,delta=2,noexec,optim=
 
 _start_clb_config:
-    DW  0x03E1
-    DW  0x3C1F
-    DW  0x21F0
+    DW  0x14CB
+    DW  0x3CBF
+    DW  0x0BF0
     DW  0x3E1F
     DW  0x03F0
     DW  0x3E1F
@@ -97,9 +97,9 @@ _start_clb_config:
     DW  0x3E1F
     DW  0x03E1
     DW  0x3E1F
-    DW  0x03E1
-    DW  0x3C1F
-    DW  0x21F0
+    DW  0x2815
+    DW  0x3D5F
+    DW  0x15F0
     DW  0x3E1F
     DW  0x03F0
     DW  0x3E1F
@@ -153,7 +153,7 @@ _start_clb_config:
     DW  0x3F1F
     DW  0x23F1
     DW  0x3D1F
-    DW  0x0C00
+    DW  0x0C07
     DW  0x0000
     DW  0x0000
     DW  0x0000

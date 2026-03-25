@@ -32,10 +32,17 @@
     EXCEED AMOUNT OF FEES, IF ANY, YOU PAID DIRECTLY TO MICROCHIP FOR 
     THIS SOFTWARE.
  */
+#include "mcc_generated_files/adc/adc.h"
+#include "mcc_generated_files/fvr/fvr.h"
+#include "mcc_generated_files/system/pins.h"
 #include "mcc_generated_files/system/system.h"
 #include "mcc_generated_files/timer/delay.h"
 #include "config_16F13145.h"
 #include "OLED128x64.h"
+#include <string.h>
+
+uint8_t	ASCII_Buffer[32];
+adc_result_t BATT_preValue = 0;
 
 /*
     Main application
@@ -46,9 +53,21 @@ int main(void)
     SYSTEM_Initialize();
 	DELAY_milliseconds(200);
 
+    while(!FVR_IsOutputReady())
+    {
+    }
+
+    POINT_TO_VR = SET;
+    VR_ConvertFlag = CLEAR;
+    BATT_ConvertFlag = CLEAR;
+    switchFlag = CLEAR;
+    ADC_ChannelSelect(VR);
+    ADC_AcquisitionTimeSet(32);
+
     CLB1_CLB1I0_SetInterruptHandler(USER_CLB1I0_ISR);
+	CLB1_CLB1I1_SetInterruptHandler(USER_CLB1I1_ISR);
     TMR0_PeriodMatchCallbackRegister(USER_TMR0_ISR);
-    ADC_ThresholdCallbackRegister(USER_ADC_ISR);
+    ADC_ConversionDoneCallbackRegister(USER_ADC_ISR);
     
 
     // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts 
@@ -69,9 +88,42 @@ int main(void)
     
 	OLED_Init();
 	OLED_CLS();
-	OLED_Put8x16Str(24, 1, "PIC16F13145");
+	OLED_Put8x16Str(24, 0, "PIC16F13145");
 
-    while (1) 
+    while (1)
     {
+		if(switchFlag)
+		{
+			IND_G_LAT = IND_ON;
+			IND_R_LAT = IND_OFF;
+			
+			if(VR_ConvertFlag)
+			{
+				VR_ConvertFlag = CLEAR;
+				strcpy((char*)ASCII_Buffer, "   VR = ");
+				VR_TO_STR(VR_avgValue, ASCII_Buffer + 8);
+				OLED_Put8x16Str(0,2, ASCII_Buffer);
+			}
+
+			if(BATT_ConvertFlag)
+			{
+				BATT_ConvertFlag = CLEAR;
+
+				strcpy((char*)ASCII_Buffer, "ADRES = ");
+				VR_TO_STR(BATT_avgValue, ASCII_Buffer + 8);
+				OLED_Put8x16Str(0,4, ASCII_Buffer);
+
+				uint16_t BATT_realValue = (uint16_t)((BATT_avgValue * 100UL)/155);
+
+				strcpy((char*)ASCII_Buffer, "  Vin = ");
+				BATT_TO_STR(BATT_realValue, ASCII_Buffer + 8);
+				OLED_Put8x16Str(0,6, ASCII_Buffer);
+			}
+		}
+		else
+		{
+			IND_G_LAT = IND_OFF;
+			IND_R_LAT = IND_ON;
+		}
     }
 }

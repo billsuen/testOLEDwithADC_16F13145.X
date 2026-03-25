@@ -54,13 +54,13 @@ void ADC_Initialize(void)
 			|(0U << _ADCON1_ADGPOL_POSITION)	/* ADGPOL digital_low(0) */
 			|(0U << _ADCON1_ADIPEN_POSITION)	/* ADIPEN disabled(0) */
 			|(0U << _ADCON1_ADPPOL_POSITION);	/* ADPPOL VSS(0) */
-    ADCON2 = (uint8_t)(2U << _ADCON2_ADMD_POSITION)	/* ADMD Average_mode(2) */
+    ADCON2 = (uint8_t)(0U << _ADCON2_ADMD_POSITION)	/* ADMD Basic_mode(0) */
 			|(1U << _ADCON2_ADACLR_POSITION)	/* ADACLR enabled(1) */
 			|(3U << _ADCON2_ADCRS_POSITION)	/* ADCRS 0x3(3) */
 			|(0U << _ADCON2_ADPSIS_POSITION);	/* ADPSIS ADRES(0) */
-    ADCON3 = (uint8_t)(5U << _ADCON3_ADTMD_POSITION)	/* ADTMD ADERR <= ADUTH(5) */
+    ADCON3 = (uint8_t)(0U << _ADCON3_ADTMD_POSITION)	/* ADTMD disabled(0) */
 			|(0U << _ADCON3_ADSOI_POSITION)	/* ADSOI ADGO not cleared(0) */
-			|(5U << _ADCON3_ADCALC_POSITION);	/* ADCALC Filtered value vs setpoint(5) */
+			|(1U << _ADCON3_ADCALC_POSITION);	/* ADCALC Actual result vs setpoint(1) */
     ADCLK = (uint8_t)(15U << _ADCLK_ADCS_POSITION);	/* ADCS FOSC/32(15) */
     ADCG1A = (uint8_t)(0U << _ADCG1A_CGA0_POSITION)	/* CGA0 disabled(0) */
 			|(0U << _ADCG1A_CGA1_POSITION)	/* CGA1 disabled(0) */
@@ -97,7 +97,7 @@ void ADC_Initialize(void)
     ADACQH = (uint8_t)(0U << _ADACQH_ACQ_POSITION);	/* ACQ 0x0(0) */ 
     ADPREL = (uint8_t)(0U << _ADPREL_PRE_POSITION);	/* PRE 0x0(0) */ 
     ADPREH = (uint8_t)(0U << _ADPREH_PRE_POSITION);	/* PRE 0x0(0) */
-    ADREF = (uint8_t)(3U << _ADREF_ADPREF_POSITION);	/* ADPREF FVR_buf1(3) */    
+    ADREF = (uint8_t)(0U << _ADREF_ADPREF_POSITION);	/* ADPREF VDD(0) */    
     ADACT = (uint8_t)(0U << _ADACT_ADACT_POSITION);	/* ADACT disabled(0) */ 
     ADSTAT =(uint8_t)(0U << _ADSTAT_ADMATH_POSITION);	/* ADMATH registers not updated(0) */   
     
@@ -107,9 +107,9 @@ void ADC_Initialize(void)
     ADC_ThresholdCallback = NULL;
     
     PIR6bits.ADIF = ADC_BIT_CLEAR;
-    PIE6bits.ADIE = ADC_BIT_CLEAR;
+    PIE6bits.ADIE = ADC_BIT_SET;
     PIR6bits.ADTIF = ADC_BIT_CLEAR;
-    PIE6bits.ADTIE = ADC_BIT_SET;
+    PIE6bits.ADTIE = ADC_BIT_CLEAR;
     ADCON0 = (uint8_t)(1U << _ADCON0_ADON_POSITION)	/* ADON enabled(1) */
 			|(0U << _ADCON0_ADCONT_POSITION)	/* ADCONT disabled(0) */
 			|(0U << _ADCON0_ADCS_POSITION)	/* ADCS FOSC(0) */
